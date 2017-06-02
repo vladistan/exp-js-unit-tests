@@ -1,0 +1,21 @@
+{
+  "name": "learn-js-tests-qunit",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Vlad <vlad@v-lad.org>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "qunit": "^2.3.2",
+    "jquery": "^3.2.1"
+  }
+}
