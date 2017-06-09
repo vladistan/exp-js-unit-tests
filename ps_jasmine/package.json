@@ -1,5 +1,5 @@
 {
-  "name": "learn-js-tests-qunit",
+  "name": "learn-js-tests-jasmine",
   "version": "0.0.1",
   "scripts": {
     "build": "tsc -p src/",
@@ -25,7 +25,6 @@
     "karma-chrome-launcher": "^2.0.0",
     "karma-cli": "^1.0.1",
     "lite-server": "^2.2.2",
-    "phantomjs-prebuilt": "^2.1.14",
-    "qunit-phantomjs-runner": "^2.3.0"
+    "phantomjs-prebuilt": "^2.1.14"
   }
 }

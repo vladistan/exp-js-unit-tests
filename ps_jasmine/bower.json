@@ -1,5 +1,5 @@
 {
-  "name": "learn-js-tests-qunit",
+  "name": "learn-js-tests-jasmine",
   "description": "",
   "main": "",
   "authors": [
@@ -15,7 +15,9 @@
     "tests"
   ],
   "devDependencies": {
-    "qunit": "^2.3.2",
+    "jasmine-core": "jasmine#^2.6.2"
+  },
+  "dependencies": {
     "jquery": "^3.2.1"
   }
 }
