@@ -12,5 +12,5 @@ Calculator.prototype.add = function(a, b) {
 };
 
 Calculator.prototype.divide = function(a, b) {
-    $(this.el).html(a+b);
+    $(this.el).html(a/b);
 };

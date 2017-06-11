@@ -12,7 +12,6 @@ describe('Calculator', function () {
     var outputId = '#calc-fixture';
 
     beforeEach(function () {
-        calc = new Calculator($(outputId));
 
         jasmine.addMatchers({
             toBeCloseToOneThird: function (util, customTesters) {
@@ -30,28 +29,38 @@ describe('Calculator', function () {
             }
         });
 
+        $('body').append($('#template-wrapper').html().replace('-template',''));
+
+        calc = new Calculator($(outputId));
+
+
+    });
+
+    afterEach(function() {
+       $(outputId).remove();
     });
 
     it('should be able to add 1 and 1', function () {
-
-        expect(calc.add(1, 1)).toBe(2);
+        calc.add(1, 1);
+        expect($(outputId).text()).toBe('2');
     });
 
     it('should be able to add 8 and 4', function () {
-
-        expect(calc.add(8, 4)).toBe(12);
+        calc.add(8, 4);
+        expect($(outputId).text()).toBe('12');
     });
 
 
     it('should be able to divide 6 and 2', function () {
 
-        expect(calc.divide(6, 2)).toBe(3);
+        calc.divide(6, 2);
+        expect($(outputId).text()).toBe('3');
 
     });
 
     it('should be able to divide 1 and 3', function () {
-
-        expect(calc.divide(1, 3)).toBeCloseToOneThird();
+        calc.divide(1, 3);
+        expect($(outputId).text()).toBeCloseToOneThird();
 
     });
 
