@@ -50,7 +50,7 @@ describe('Calculator', function () {
             cnt.append(el);
             calc = new Calculator(el);
 
-            var cbb = function (cb) {
+            var cbb = function () {
                 done();
             };
             calc.hide_result(cbb);
@@ -71,6 +71,7 @@ describe('Calculator', function () {
 
 
     });
+
 
     it('should be able to add 1 and 1', function () {
         calc.add(1, 1);
@@ -95,6 +96,46 @@ describe('Calculator', function () {
         expect($(outputId).text()).toBeCloseToOneThird();
 
     });
+
+});
+
+describe('Clock Test', function() {
+
+    var el;
+    var calc;
+    var flag;
+
+    beforeEach(function (done) {
+
+        el = $("<div>somecontent</div>");
+        var cnt = $('#container');
+        cnt.append(el);
+
+        flag = false;
+
+        calc = new Calculator(el);
+
+        var cbb = function () {
+            flag = true;
+            done();
+        };
+
+        calc.pause(cbb);
+
+    });
+
+
+
+    afterEach(function () {
+        $(el).remove();
+    });
+
+    it('Should have CB flag set', function() {
+
+        expect(flag).toBeTruthy();
+
+    });
+
 
 });
 

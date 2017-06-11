@@ -12,8 +12,9 @@ Calculator.prototype.hide_result = function (cb) {
 
 };
 
-Calculator.prototype.divide = function(a, b) {
-    $(this.el).html(a/b);
+Calculator.prototype.pause = function(cb) {
+
+    setTimeout(cb, 20000);
 
 };
 
