@@ -21,23 +21,55 @@ describe('Calculator', function () {
                         return {
                             pass: passed,
                             message: 'Expected ' + actual + ' to be close ' +
-                                     'to 1/3, but it differs by ' +
-                                      (actual - 1.0/3.0)
+                            'to 1/3, but it differs by ' +
+                            (actual - 1.0 / 3.0)
                         };
                     }
                 };
             }
         });
 
-        $('body').append($('#template-wrapper').html().replace('-template',''));
+        $('body').append($('#template-wrapper').html().replace('-template', ''));
 
         calc = new Calculator($(outputId));
 
 
     });
 
-    afterEach(function() {
-       $(outputId).remove();
+    afterEach(function () {
+        $(outputId).remove();
+    });
+
+    describe('FX tests', function () {
+        var el;
+        var calc;
+
+        beforeEach(function (done) {
+            el = $("<div>somecontent</div>");
+            var cnt = $('#container');
+            cnt.append(el);
+            calc = new Calculator(el);
+
+            var cbb = function (cb) {
+                done();
+            };
+            calc.hide_result(cbb);
+
+
+        });
+
+        afterEach(function () {
+            el.remove();
+        });
+
+
+        it('Should have element hidden after hide result completes', function () {
+
+            expect(el.css('display')).toBe('none');
+
+        });
+
+
     });
 
     it('should be able to add 1 and 1', function () {
@@ -65,3 +97,5 @@ describe('Calculator', function () {
     });
 
 });
+
+

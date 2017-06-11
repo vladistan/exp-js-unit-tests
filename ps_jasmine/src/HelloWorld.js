@@ -1,16 +1,28 @@
-var Calculator = function(element) {
+var Calculator = function (displayElement) {
 
-    this.el = element;
+    this.el = displayElement;
+    this.$el = $(displayElement);
 
 
 };
 
-Calculator.prototype.add = function(a, b) {
+Calculator.prototype.hide_result = function (cb) {
 
-    $(this.el).html(a+b);
+    this.$el.fadeOut(1000, cb);
 
 };
 
 Calculator.prototype.divide = function(a, b) {
     $(this.el).html(a/b);
+
+};
+
+Calculator.prototype.add = function (a, b) {
+
+    $(this.el).html(a + b);
+
+};
+
+Calculator.prototype.divide = function (a, b) {
+    $(this.el).html(a / b);
 };
