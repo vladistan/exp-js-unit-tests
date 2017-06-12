@@ -120,7 +120,16 @@ describe('Clock Test', function() {
             done();
         };
 
+        jasmine.clock().install();
+
         calc.pause(cbb);
+
+        jasmine.clock().tick(10000);
+
+        expect(flag).toBeFalsy();
+
+        jasmine.clock().tick(20000);
+
 
     });
 
@@ -128,6 +137,10 @@ describe('Clock Test', function() {
 
     afterEach(function () {
         $(el).remove();
+
+        jasmine.clock().uninstall();
+
+
     });
 
     it('Should have CB flag set', function() {
