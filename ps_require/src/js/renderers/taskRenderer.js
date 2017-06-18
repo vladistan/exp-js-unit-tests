@@ -1,11 +1,6 @@
-define(["jquery"], function ($) {
+define(["jquery", "hbs!templates/taskTemplate"], function ($, taskTemplate) {
     "use strict";
 
-    var taskTemplate = '<li class="task">' +
-        '<input class="complete" type="checkbox" /> ' +
-        '<input class="description" type="text" placeholder="Enter task description..." /> ' +
-        '<button class="delete-button">Delete</button>' +
-        '</li>';
 
     function renderTasks(tasks) {
         var elementArray = $.map(tasks, _renderTask);
@@ -21,11 +16,7 @@ define(["jquery"], function ($) {
     }
 
     function _renderTask(task) {
-        var $task = $(taskTemplate);
-        if (task.complete) {
-            $task.find(".complete").attr("checked", "checked");
-        }
-        $task.find(".description").val(task.description);
+        var $task = $(taskTemplate(task));
         return $task;
     }
 
