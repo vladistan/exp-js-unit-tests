@@ -1,4 +1,4 @@
-define(["jquery", "data/taskData", "renderers/taskRenderer"], function ($, taskData, taskRenderer) {
+define(["jquery", "log", "data/taskData", "renderers/taskRenderer"], function ($, log, taskData, taskRenderer) {
 
     "use strict;"
 
@@ -6,20 +6,24 @@ define(["jquery", "data/taskData", "renderers/taskRenderer"], function ($, taskD
     /* task management */
 
     function add() {
+        log.addMessage("Add new task");
         taskRenderer.renderNew();
     }
 
     function remove(clickEvent) {
+        log.addMessage("Remove task")
         var taskElement = clickEvent.target;
         $(taskElement).closest(".task").remove();
     }
 
     function clear() {
+        log.addMessage("Clear all tasks");
         taskData.clear();
-        taskRenderer.render();
+        taskRenderer.renderTasks([]);
     }
 
     function save() {
+        log.addMessage("Save");
         var tasks = [];
         $("#task-list .task").each(function (index, task) {
             var $task = $(task);
