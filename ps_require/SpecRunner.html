@@ -12,7 +12,10 @@
     <script type="text/javascript" src="src/js/require-config.js"></script>
     <script type="text/javascript">
         require.config({
-            baseUrl: "src/js"
+            baseUrl: "src/js",
+      		paths: {
+        		Squire: "../../lib/Squire"
+      		}
         });
     </script>
     <script src="spec/tasksModule.spec.js"></script>
