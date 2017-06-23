@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jasmine Spec Runner</title>
+
+    <!-- start with loading jasmine -->
+    <link rel="shortcut icon" type="image/png"
+          href="bower_components/jasmine-core/lib/jasmine-core/jasmine_favicon.png">
+    <link rel="stylesheet" type="text/css" href="bower_components/jasmine-core/lib/jasmine-core/jasmine.css">
+
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/jasmine-core/lib/jasmine-core/jasmine.js"></script>
+    <script type="text/javascript" src="bower_components/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
+    <script type="text/javascript" src="bower_components/jasmine-reporters/src/junit_reporter.js"></script>
+    <script type="text/javascript" src="bower_components/jasmine-reporters/src/terminal_reporter.js"></script>
+    <script type="text/javascript" src="bower_components/jasmine-core/lib/jasmine-core/boot.js"></script>
+    <script type="text/javascript">
+        jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
+            savePath: '../../..',
+            consolidateAll: true
+        }));
+    </script>
+    <script type="text/javascript">
+        jasmine.getEnv().addReporter(new jasmineReporters.TerminalReporter({
+            verbosity: 9,
+            color: true,
+            showstack: true
+        }));
+    </script>
+
+    <!--&lt;!&ndash; then require.js &ndash;&gt;-->
+    <!--<script type="text/javascript" src="lib/require.js"></script>-->
+
+    <!-- include source files here... -->
+    <script type="text/javascript" src="src/Spies.js"></script>
+
+    <!-- include spec files here... -->
+    <script type="text/javascript" src="specs/Spies-spec.js"></script>
+
+
+
+
+</head>
+
+<body>
+<div id="template-wrapper">
+    <div id="calc-fixture-template">Hello there</div>
+</div>
+<div id="container">
+
+</div>
+</body>
+</html>
