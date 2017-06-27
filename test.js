@@ -11,6 +11,8 @@ QUnit.module('module 2', {
 
     }
 });
+
+
 QUnit.test('my second test', function () {
     QUnit.assert.strictEqual(3, 3);
 });
