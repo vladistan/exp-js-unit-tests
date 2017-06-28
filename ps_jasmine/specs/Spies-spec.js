@@ -70,4 +70,57 @@ describe('Obj Spies', function() {
         expect(rwd).toBe(11);
 
     });
+
+    it("Can verify params", function() {
+
+        var spy = jasmine.createSpy('mine');
+
+        spy(94);
+        spy(2, 1);
+
+        expect(spy).toHaveBeenCalledWith(94);
+        expect(spy).toHaveBeenCalledWith(2, 1);
+        expect(spy).not.toHaveBeenCalledWith(1, 2, 3);
+
+    });
+
+    it("Can use calls collection", function() {
+
+        var myObj = { m1:  function() {}};
+        var myObj2 = { m1:  function() {}};
+
+        var spy = spyOn(myObj, 'm1');
+
+        myObj.m1(1);
+        myObj.m1(2,4);
+        myObj.m1(3);
+
+
+        expect(spy.calls.count()).toBe(3);
+        expect(spy.calls.all()[0].args[0]).toBe(1);
+        expect(spy.calls.all()[1].args[0]).toBe(2);
+        expect(spy.calls.all()[1].args[1]).toBe(4);
+
+        expect(spy.calls.all()[2].object).toBe(myObj);
+
+    });
+
+    it("Can reset spy", function() {
+
+        var spy = jasmine.createSpy('mine');
+
+        spy(94);
+        spy(2, 1);
+
+        expect(spy.calls.count()).toBe(2);
+        expect(spy).toHaveBeenCalled();
+
+        spy.calls.reset();
+
+        expect(spy).not.toHaveBeenCalled();
+
+
+    });
+
+
 });
