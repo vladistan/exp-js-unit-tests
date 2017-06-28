@@ -1,0 +1,22 @@
+{
+  "name": "learn-js-tests-mocha",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Vlad <vlad@v-lad.org>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "mocha": "^3.4.2",
+    "chai": "^4.0.2"
+  },
+  "dependencies": {}
+}
