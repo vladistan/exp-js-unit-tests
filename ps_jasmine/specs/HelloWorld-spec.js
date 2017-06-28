@@ -6,7 +6,7 @@ describe('MyClass', function () {
 });
 
 
-describe('Calculator', function () {
+xdescribe('Calculator', function () {
 
     var calc;
     var outputId = '#calc-fixture';
