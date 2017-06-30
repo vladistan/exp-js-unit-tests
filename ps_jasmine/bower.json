@@ -16,7 +16,8 @@
   ],
   "devDependencies": {
     "jasmine-core": "jasmine#^2.6.2",
-    "sinon": "^2.3.5"
+    "sinon": "^2.3.5",
+    "jasmine-reporters": "^2.2.1"
   },
   "dependencies": {
     "jquery": "^3.2.1"

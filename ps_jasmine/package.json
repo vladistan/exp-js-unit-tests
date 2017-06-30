@@ -9,7 +9,7 @@
     "serve:e2e": "lite-server -c=bs-config.e2e.json",
     "prestart": "npm run build",
     "start": "concurrently \"npm run build:watch\" \"npm run serve\"",
-    "test": "concurrently \"npm run build:watch\" \"karma start karma.conf.js\"",
+    "test": "bower_components/jasmine-reporters/bin/phantomjs.runner.sh tests.html",
     "pretest:once": "npm run build",
     "test:once": "karma start karma.conf.js --single-run"
   },
