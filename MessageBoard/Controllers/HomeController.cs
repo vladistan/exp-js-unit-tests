@@ -20,6 +20,11 @@ namespace MessageBoard.Controllers
             return View();
         }
 
+        public ActionResult Hello()
+        {
+            return View();
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
