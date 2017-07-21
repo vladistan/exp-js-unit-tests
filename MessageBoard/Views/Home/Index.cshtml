@@ -1,5 +1,14 @@
-﻿@{
+﻿@model IEnumerable<MessageBoard.Data.Topic>
+@{
     ViewBag.Title = "Home Page";
+}
+
+@foreach (var topic in Model)
+{
+    <div>
+        @topic.Title
+        -- @topic.Body
+    </div>
 }
 
 <div class="jumbotron">

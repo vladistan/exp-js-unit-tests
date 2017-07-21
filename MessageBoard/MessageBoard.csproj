@@ -222,6 +222,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Data\IMessageBoardRepository.cs" />
+    <Compile Include="Data\MessageBoardContext.cs" />
+    <Compile Include="Data\MessageBoardRepository.cs" />
+    <Compile Include="Data\Reply.cs" />
+    <Compile Include="Data\Topic.cs" />
     <Compile Include="Services\MockMailService.cs" />
     <Compile Include="Services\IMailService.cs" />
     <Compile Include="Services\MailService.cs" />
