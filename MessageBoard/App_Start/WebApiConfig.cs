@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using MessageBoard.Controllers;
 using Newtonsoft.Json.Serialization;
 
 namespace MessageBoard
@@ -22,8 +23,8 @@ namespace MessageBoard
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/v1/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "api/v1/Topics/{id}",
+                defaults: new { controller = "topics", id = RouteParameter.Optional }
             );
         }
     }
