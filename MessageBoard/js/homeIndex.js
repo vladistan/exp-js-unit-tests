@@ -21,10 +21,16 @@ app.config(
 
     });
 
-app.factory("dataservice", function( $http, $q) {
-        console.log("Data service started");
+app.factory("dataservice", function($http, $q) {
+    console.log("Data service started");
 
-        var _topics = [];
+    var _topics = [];
+    var _isInit = false;
+
+    var _isReady = function() {
+
+        return _isInit;
+    };
 
         var _getTopics = function () {
 
@@ -34,6 +40,7 @@ app.factory("dataservice", function( $http, $q) {
                 function(result) {
                     console.log("Loaded messages");
                     angular.copy(result.data, _topics);
+                    _isInit = true;
                     deffered.resolve();
                 },
                 function() {
@@ -45,9 +52,29 @@ app.factory("dataservice", function( $http, $q) {
             return deffered.promise;
         };
 
+    var _addTopic = function(newTopic) {
+
+        var deffered = $q.defer();
+
+        $http.post("/api/v1/topics", newTopic).then(
+            function success(result) {
+                var newlyCreatedTopic = result.data;
+                _topics.splice(0, 0, newlyCreatedTopic);
+                deffered.resolve(newlyCreatedTopic);
+            },
+            function error() {
+                deffered.reject();
+            });
+
+
+        return deffered.promise;
+    }
+
         return {
             topics: _topics,
-            getTopics: _getTopics
+            getTopics: _getTopics,
+            addTopic: _addTopic,
+            isReady: _isReady
         };
 
     });
@@ -57,23 +84,25 @@ app.controller("topicsController", function ($scope, $http, dataservice) {
     console.log("Inside of the home controller");
 
     $scope.data = dataservice;
-    $scope.isBusy = true;
+    $scope.isBusy = false;
 
-    dataservice.getTopics().then(
-        function() {
-            // ok
-        },
-        function() {
-            // error
-        }).then(
-        function () {
-            $scope.isBusy = false;
-        });
-
+    if (!dataservice.isReady()) {
+        $scope.isBusy = true;
+        dataservice.getTopics().then(
+            function() {
+                // ok
+            },
+            function() {
+                // error
+            }).then(
+            function() {
+                $scope.isBusy = false;
+            });
+    }
 
 });
 
-app.controller("newTopicController",  function ($scope, $http, $window) {
+app.controller("newTopicController",  function ($scope, $http, $window, dataservice) {
 
         console.log("Initialize new topic controller");
 
@@ -83,15 +112,19 @@ app.controller("newTopicController",  function ($scope, $http, $window) {
             console.log("NT [T]: " + $scope.newTopic.title);
             console.log("NT [B]: " + $scope.newTopic.body);
 
-            $http.post("/api/v1/topics", $scope.newTopic).then(
-                function success(result) {
-                    var newTopic = result.data;
-
+            dataservice.addTopic($scope.newTopic).then(
+                function() {
+                    // ok
                     $window.location = "#/";
                 },
-                function error() {
-                    alert("Cannot post new topic");
-                });
+                function() {
+                    // error
+                    alert("Could not create new topic");
+                }
+                );
+
+
+
         }
 
 
