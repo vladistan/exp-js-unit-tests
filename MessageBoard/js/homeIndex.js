@@ -5,10 +5,10 @@ app.controller("homeIndexController", function ($scope, $http) {
 
     console.log("Inside of the home controller");
 
-    $scope.count = 0;
     $scope.messages = [];
+    $scope.isBusy = true;
 
-    $http.get("/api/v1/Topics").then(
+    $http.get("/api/v1/Topics?includeReplies=True").then(
         function(result) {
             console.log("Loaded messages");
             angular.copy(result.data, $scope.messages);
@@ -17,7 +17,10 @@ app.controller("homeIndexController", function ($scope, $http) {
             console.log("Failed to load messages");
         }
 
-        );
+        ).then(
+        function() {
+            $scope.isBusy = false;
+        });
 
 
 });
