@@ -60,5 +60,19 @@ namespace MessageBoard.Data
                 throw;
             }
         }
+
+        public bool AddReply(Reply newReply)
+        {
+            try
+            {
+                _ctx.Replies.Add(newReply);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

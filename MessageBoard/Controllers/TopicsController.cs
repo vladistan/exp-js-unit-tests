@@ -19,9 +19,19 @@ namespace MessageBoard.Controllers
             _repo = repo;
         }
 
-        public IEnumerable<Topic> Get()
+        public IEnumerable<Topic> Get(bool includeReplies = false)
         {
-            return _repo.GetTopicsIncludingReplies()
+            IQueryable<Topic> topics;
+
+            if (includeReplies)
+            {
+                topics = _repo.GetTopicsIncludingReplies();
+            }
+            else
+            {
+                topics = _repo.GetTopics();
+            }
+            return topics
                 .OrderByDescending(t => t.Created)
                 .Take(50)
                 .ToList();

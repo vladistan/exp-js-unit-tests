@@ -17,6 +17,7 @@ namespace MessageBoard.Data
         bool Save();
 
         bool AddTopic(Topic newTopic);
+        bool AddReply(Reply newReply);
 
 
 
