@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Data.Entity;
+
 
 namespace MessageBoard.Data
 {
@@ -19,6 +21,11 @@ namespace MessageBoard.Data
         public IQueryable<Topic> GetTopics()
         {
             return _ctx.Topics;
+        }
+
+        public IQueryable<Topic> GetTopicsIncludingReplies()
+        {
+            return _ctx.Topics.Include(t => t.Replies);
         }
 
         public IQueryable<Reply> GetTopicReplies(int topicId)

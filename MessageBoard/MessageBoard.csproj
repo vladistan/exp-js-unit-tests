@@ -226,6 +226,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\RepliesController.cs" />
     <Compile Include="Controllers\TopicsController.cs" />
     <Compile Include="Data\IMessageBoardRepository.cs" />
     <Compile Include="Data\MessageBoardContext.cs" />
@@ -432,6 +433,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Replies\" />
     <Folder Include="Views\Topics\" />
   </ItemGroup>
   <ItemGroup>

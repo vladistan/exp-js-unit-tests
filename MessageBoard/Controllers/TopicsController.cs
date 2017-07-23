@@ -21,7 +21,7 @@ namespace MessageBoard.Controllers
 
         public IEnumerable<Topic> Get()
         {
-            return _repo.GetTopics()
+            return _repo.GetTopicsIncludingReplies()
                 .OrderByDescending(t => t.Created)
                 .Take(50)
                 .ToList();

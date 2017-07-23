@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Web;
 
+
 namespace MessageBoard.Data
 {
     public class Topic
@@ -18,7 +19,7 @@ namespace MessageBoard.Data
 
         public DateTime Created { get; set; }
 
-        public ICollection<Reply> Replies;
+        public ICollection<Reply> Replies { get; set; }
 
 
     }
