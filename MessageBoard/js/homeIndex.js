@@ -1,7 +1,27 @@
-﻿var app = angular.module("myApp", []);
+﻿var app = angular.module("homeIndex", ["ngRoute"]);
 
 
-app.controller("homeIndexController", function ($scope, $http) {
+app.config(
+
+    function ($routeProvider) {
+
+    $routeProvider.when("/",
+        {
+            controller: "topicsController",
+            templateUrl: "/Templates/topicsView.html"
+        });
+
+        $routeProvider.when("/newMessage",
+            {
+                controller: "newTopicController",
+                templateUrl: "/Templates/newTopicView.html"
+            });
+
+    $routeProvider.otherwise("/");
+
+});
+
+app.controller("topicsController", function ($scope, $http) {
 
     console.log("Inside of the home controller");
 
@@ -21,6 +41,29 @@ app.controller("homeIndexController", function ($scope, $http) {
         function() {
             $scope.isBusy = false;
         });
+});
+
+app.controller("newTopicController",  function ($scope, $http, $window) {
+
+        console.log("Initialize new topic controller");
+
+        $scope.newTopic = {};
+
+        $scope.save = function() {
+            console.log("NT [T]: " + $scope.newTopic.title);
+            console.log("NT [B]: " + $scope.newTopic.body);
+
+            $http.post("/api/v1/topics", $scope.newTopic).then(
+                function success(result) {
+                    var newTopic = result.data;
+
+                    $window.location = "#/";
+                },
+                function error() {
+                    alert("Cannot post new topic");
+                });
+        }
+
 
 
 });
