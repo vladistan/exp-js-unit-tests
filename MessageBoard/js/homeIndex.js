@@ -19,28 +19,58 @@ app.config(
 
     $routeProvider.otherwise("/");
 
-});
+    });
 
-app.controller("topicsController", function ($scope, $http) {
+app.factory("dataservice", function( $http, $q) {
+        console.log("Data service started");
+
+        var _topics = [];
+
+        var _getTopics = function () {
+
+            var deffered = $q.defer();
+
+            $http.get("/api/v1/Topics?includeReplies=True").then(
+                function(result) {
+                    console.log("Loaded messages");
+                    angular.copy(result.data, _topics);
+                    deffered.resolve();
+                },
+                function() {
+                    console.log("Failed to load messages");
+                    deffered.reject();
+                }
+            );
+
+            return deffered.promise;
+        };
+
+        return {
+            topics: _topics,
+            getTopics: _getTopics
+        };
+
+    });
+
+app.controller("topicsController", function ($scope, $http, dataservice) {
 
     console.log("Inside of the home controller");
 
-    $scope.messages = [];
+    $scope.data = dataservice;
     $scope.isBusy = true;
 
-    $http.get("/api/v1/Topics?includeReplies=True").then(
-        function(result) {
-            console.log("Loaded messages");
-            angular.copy(result.data, $scope.messages);
+    dataservice.getTopics().then(
+        function() {
+            // ok
         },
         function() {
-            console.log("Failed to load messages");
-        }
-
-        ).then(
-        function() {
+            // error
+        }).then(
+        function () {
             $scope.isBusy = false;
         });
+
+
 });
 
 app.controller("newTopicController",  function ($scope, $http, $window) {
