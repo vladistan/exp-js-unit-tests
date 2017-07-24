@@ -8,7 +8,6 @@ namespace MessageBoard.Data
     public class MessageBoardMigrationsConfiguration :
         DbMigrationsConfiguration<MessageBoardContext>
     {
-
         public MessageBoardMigrationsConfiguration()
         {
             this.AutomaticMigrationDataLossAllowed = true;
@@ -40,7 +39,6 @@ namespace MessageBoard.Data
                             Created = DateTime.Now
                         }
                     }
-
                 };
 
                 context.Topics.Add(topic);
@@ -49,15 +47,12 @@ namespace MessageBoard.Data
                 {
                     context.SaveChanges();
                 }
-                catch ( Exception ex)
+                catch (Exception ex)
                 {
                     var msg = ex.Message;
-
                 }
-
             }
 #endif
-
         }
     }
 }

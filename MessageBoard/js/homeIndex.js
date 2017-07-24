@@ -2,14 +2,13 @@
 
 
 app.config(
+    function($routeProvider) {
 
-    function ($routeProvider) {
-
-    $routeProvider.when("/",
-        {
-            controller: "topicsController",
-            templateUrl: "/Templates/topicsView.html"
-        });
+        $routeProvider.when("/",
+            {
+                controller: "topicsController",
+                templateUrl: "/Templates/topicsView.html"
+            });
 
         $routeProvider.when("/newMessage",
             {
@@ -17,22 +16,30 @@ app.config(
                 templateUrl: "/Templates/newTopicView.html"
             });
 
-    $routeProvider.otherwise("/");
+        $routeProvider.when("/newMessage",
+            {
+                controller: "newTopicController",
+                templateUrl: "/Templates/newTopicView.html"
+            });
+
+
+        $routeProvider.otherwise("/");
 
     });
 
-app.factory("dataservice", function($http, $q) {
-    console.log("Data service started");
+app.factory("dataservice",
+    function($http, $q) {
+        console.log("Data service started");
 
-    var _topics = [];
-    var _isInit = false;
+        var _topics = [];
+        var _isInit = false;
 
-    var _isReady = function() {
+        var _isReady = function() {
 
-        return _isInit;
-    };
+            return _isInit;
+        };
 
-        var _getTopics = function () {
+        var _getTopics = function() {
 
             var deffered = $q.defer();
 
@@ -52,23 +59,23 @@ app.factory("dataservice", function($http, $q) {
             return deffered.promise;
         };
 
-    var _addTopic = function(newTopic) {
+        var _addTopic = function(newTopic) {
 
-        var deffered = $q.defer();
+            var deffered = $q.defer();
 
-        $http.post("/api/v1/topics", newTopic).then(
-            function success(result) {
-                var newlyCreatedTopic = result.data;
-                _topics.splice(0, 0, newlyCreatedTopic);
-                deffered.resolve(newlyCreatedTopic);
-            },
-            function error() {
-                deffered.reject();
-            });
+            $http.post("/api/v1/topics", newTopic).then(
+                function success(result) {
+                    var newlyCreatedTopic = result.data;
+                    _topics.splice(0, 0, newlyCreatedTopic);
+                    deffered.resolve(newlyCreatedTopic);
+                },
+                function error() {
+                    deffered.reject();
+                });
 
 
-        return deffered.promise;
-    }
+            return deffered.promise;
+        }
 
         return {
             topics: _topics,
@@ -79,30 +86,32 @@ app.factory("dataservice", function($http, $q) {
 
     });
 
-app.controller("topicsController", function ($scope, $http, dataservice) {
+app.controller("topicsController",
+    function($scope, $http, dataservice) {
 
-    console.log("Inside of the home controller");
+        console.log("Inside of the home controller");
 
-    $scope.data = dataservice;
-    $scope.isBusy = false;
+        $scope.data = dataservice;
+        $scope.isBusy = false;
 
-    if (!dataservice.isReady()) {
-        $scope.isBusy = true;
-        dataservice.getTopics().then(
-            function() {
-                // ok
-            },
-            function() {
-                // error
-            }).then(
-            function() {
-                $scope.isBusy = false;
-            });
-    }
+        if (!dataservice.isReady()) {
+            $scope.isBusy = true;
+            dataservice.getTopics().then(
+                function() {
+                    // ok
+                },
+                function() {
+                    // error
+                }).then(
+                function() {
+                    $scope.isBusy = false;
+                });
+        }
 
-});
+    });
 
-app.controller("newTopicController",  function ($scope, $http, $window, dataservice) {
+app.controller("newTopicController",
+    function($scope, $http, $window, dataservice) {
 
         console.log("Initialize new topic controller");
 
@@ -121,12 +130,10 @@ app.controller("newTopicController",  function ($scope, $http, $window, dataserv
                     // error
                     alert("Could not create new topic");
                 }
-                );
-
+            );
 
 
         }
 
 
-
-});
+    });

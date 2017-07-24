@@ -10,7 +10,6 @@ namespace MessageBoard.Data
 {
     public class MessageBoardRepository : IMessageBoardRepository
     {
-
         MessageBoardContext _ctx;
 
         public MessageBoardRepository(MessageBoardContext ctx)

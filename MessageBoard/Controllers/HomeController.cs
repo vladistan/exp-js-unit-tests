@@ -16,8 +16,8 @@ namespace MessageBoard.Controllers
 
         public HomeController(IMailService mail, IMessageBoardRepository repo)
         {
-             _mail = mail;
-             _repo = repo;
+            _mail = mail;
+            _repo = repo;
         }
 
         public ActionResult Index()
@@ -57,7 +57,6 @@ namespace MessageBoard.Controllers
         [HttpPost]
         public ActionResult Contact(ContactModel model)
         {
-
             var msg = String.Format("From: {1}{0}Subject: {2}{0}Email:{3}{0}",
                 Environment.NewLine,
                 model.Name,
@@ -75,5 +74,4 @@ namespace MessageBoard.Controllers
             return View();
         }
     }
-
 }

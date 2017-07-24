@@ -8,7 +8,6 @@ namespace MessageBoard.Data
 {
     public interface IMessageBoardRepository
     {
-
         IQueryable<Topic> GetTopics();
 
         IQueryable<Topic> GetTopicsIncludingReplies();
@@ -18,8 +17,5 @@ namespace MessageBoard.Data
 
         bool AddTopic(Topic newTopic);
         bool AddReply(Reply newReply);
-
-
-
     }
 }

@@ -9,7 +9,6 @@ namespace MessageBoard.Data
 {
     public class Topic
     {
-
         public int Id { get; set; }
 
         public string Title { get; set; }
@@ -20,7 +19,5 @@ namespace MessageBoard.Data
         public DateTime Created { get; set; }
 
         public ICollection<Reply> Replies { get; set; }
-
-
     }
 }

@@ -27,7 +27,6 @@ namespace MessageBoard.Controllers
 
         public HttpResponseMessage Post(int topicId, [FromBody] Reply newReply)
         {
-
             if (newReply.Created == default(DateTime))
             {
                 newReply.Created = DateTime.UtcNow;
@@ -38,7 +37,6 @@ namespace MessageBoard.Controllers
             if (
                 _repo.AddReply(newReply) &&
                 _repo.Save()
-
             )
             {
                 return Request.CreateResponse(HttpStatusCode.Created, newReply);
@@ -46,8 +44,5 @@ namespace MessageBoard.Controllers
 
             return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
-
     }
-
-
 }
