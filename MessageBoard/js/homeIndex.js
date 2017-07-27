@@ -16,10 +16,10 @@ app.config(
                 templateUrl: "/Templates/newTopicView.html"
             });
 
-        $routeProvider.when("/newMessage",
+        $routeProvider.when("/message/:id",
             {
-                controller: "newTopicController",
-                templateUrl: "/Templates/newTopicView.html"
+                controller: "singleTopicController",
+                templateUrl: "/Templates/singleTopicView.html"
             });
 
 
@@ -77,11 +77,110 @@ app.factory("dataservice",
             return deffered.promise;
         }
 
+        var _findTopic = function(id) {
+            var found = null;
+
+            $.each(_topics, function(i, item) {
+                if (item.id == id) {
+                    found = item;
+                    return false;
+                }
+            });
+
+            return found;
+        }
+
+        var _getTopicById = function(id) {
+
+            var deffered = $q.defer();
+
+            var topic;
+
+            if (_isReady()) {
+                topic = _findTopic(id);
+                if (topic) {
+                    deffered.resolve(topic);
+                } else {
+                    deffered.reject();
+                }
+            } else {
+                _getTopics().then(
+                    function() {
+                        topic = _findTopic(id);
+                        if (topic) {
+                            deffered.resolve(topic);
+                        } else {
+                            deffered.reject();
+                        }
+                    },
+                    function() {
+                        deffered.reject();
+                        console.log("error getting topic with id" + id);
+                    }
+                );
+            }
+
+            return deffered.promise;
+        };
+
+        var _saveReply = function (topic, newReply) {
+
+            var deffered = $q.defer();
+
+            $http.post("/api/v1/topics/" + topic.id + "/replies", newReply).then(
+                function (res) {
+                    if(topic.replies == null ) {topic.replies = []}
+                    topic.replies.push(res.data);
+                    deffered.resolve(res.data);
+                },
+                function() {
+                    deffered.reject();
+                }
+                );
+
+            return deffered.promise;
+        }
+
         return {
             topics: _topics,
             getTopics: _getTopics,
             addTopic: _addTopic,
-            isReady: _isReady
+            isReady: _isReady,
+            getTopicById: _getTopicById,
+            saveReply: _saveReply
+        };
+
+    });
+
+app.controller("singleTopicController",
+    function($scope, dataservice, $window, $routeParams) {
+        console.log("Single topic controller");
+
+        $scope.topic = null;
+        $scope.newReply = {};
+
+        dataservice.getTopicById($routeParams.id).then(
+            function(topic) {
+                $scope.topic = topic;
+            },
+            function() {
+                window.location = "#!/";
+            }
+            );
+
+        $scope.saveReply = function() {
+            console.log("Adding reply");
+
+            dataservice.saveReply($scope.topic, $scope.newReply).then(
+                function() {
+                    $scope.newReply.body = "";
+                },
+                function() {
+                    alert("Could not save reply");
+                }
+            );
+
+
         };
 
     });
