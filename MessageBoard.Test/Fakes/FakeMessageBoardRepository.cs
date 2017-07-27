@@ -8,7 +8,7 @@ namespace MessageBoard.Tests.Fakes
 {
   public class FakeMessageBoardRepository : IMessageBoardRepository
   {
-    public IQueryable<Reply> GetRepliesByTopic(int topicId)
+    public IQueryable<Reply> GetTopicReplies(int topicId)
     {
       return new Reply[]
       {
@@ -16,21 +16,21 @@ namespace MessageBoard.Tests.Fakes
         {
           Id = 1,
           TopicId = topicId,
-          Body = "Fake Body", 
+          Body = "Fake Body",
           Created = DateTime.UtcNow
         },
         new Reply()
         {
           Id = 2,
           TopicId = topicId,
-          Body = "Another Fake Body", 
+          Body = "Another Fake Body",
           Created = DateTime.UtcNow
         },
         new Reply()
         {
           Id = 3,
           TopicId = topicId,
-          Body = "Yet Another Fake Body", 
+          Body = "Yet Another Fake Body",
           Created = DateTime.UtcNow
         },
       }.AsQueryable();
@@ -80,21 +80,21 @@ namespace MessageBoard.Tests.Fakes
             {
               Id = 1,
               TopicId = 1,
-              Body = "Fake Body", 
+              Body = "Fake Body",
               Created = DateTime.UtcNow
             },
             new Reply()
             {
               Id = 2,
               TopicId = 1,
-              Body = "Another Fake Body", 
+              Body = "Another Fake Body",
               Created = DateTime.UtcNow
             },
             new Reply()
             {
               Id = 3,
               TopicId = 1,
-              Body = "Yet Another Fake Body", 
+              Body = "Yet Another Fake Body",
               Created = DateTime.UtcNow
             },
           }
