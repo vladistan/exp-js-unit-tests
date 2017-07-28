@@ -12,6 +12,7 @@ using MessageBoard.Controllers;
 using MessageBoard.Data;
 using MessageBoard.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 
 namespace MessageBoard.Test.Controllers
 {
@@ -71,7 +72,7 @@ namespace MessageBoard.Test.Controllers
         // public void MyTestCleanup() { }
         //
         #endregion
-		
+
 		[TestMethod]
         public void TopicsController_Get()
         {
@@ -88,25 +89,34 @@ namespace MessageBoard.Test.Controllers
         [TestMethod]
         public void TopicsController_Post()
         {
-	  var config = new HttpConfiguration();
-      var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/api/v1/topics");
-      var route = config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}");
-      var routeData = new HttpRouteData(route, new HttpRouteValueDictionary { { "controller", "topics" } });
+	        var config = new HttpConfiguration();
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://jlocalhost/api/v1/topics");
+            var route = config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}");
+            var routeData = new HttpRouteData(route, new HttpRouteValueDictionary { { "controller", "topics" } });
 
-      _ctrl.ControllerContext = new HttpControllerContext(config, routeData, request);
-      _ctrl.Request = request;
-      _ctrl.Request.Properties[HttpPropertyKeys.HttpConfigurationKey] = config;
+            _topicsController.ControllerContext = new HttpControllerContext(config, routeData, request);
+            _topicsController.Request = request;
+            _topicsController.Request.Properties[HttpPropertyKeys.HttpConfigurationKey] = config;
+
+
             var topic = new Topic()
             {
                 Title = "Hello there",
                 Body  = "Test topic body"
             };
 
-            var config = new HttpConfiguration();
 
 
             var res = _topicsController.Post(topic);
-            Assert.Equals(res.StatusCode, 3000);
+            Assert.AreEqual(res.StatusCode, HttpStatusCode.Created);
+
+            var json = res.Content.ReadAsStringAsync().Result;
+            var rvTopic = JsonConvert.DeserializeObject<Topic>(json);
+
+            Assert.IsNotNull(rvTopic);
+            Assert.IsTrue(rvTopic.Id > 4);
+            Assert.AreEqual(rvTopic.Title, "Hello There");
+
         }
 
 
