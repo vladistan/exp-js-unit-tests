@@ -59,6 +59,7 @@ describe("Home Index Tests -> ",
 
                         expect(dataservice.topics).toEqual([]);
 
+                        $httpBackend.expectGET("/api/v1/Topics?includeReplies=True");
                         dataservice.getTopics().then(
                             function() {
                                 expect(dataservice.topics.length).toBeGreaterThan(0);
