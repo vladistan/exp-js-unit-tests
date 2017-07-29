@@ -45,6 +45,37 @@ describe("Home Index Tests -> ",
 
             });
 
+        describe("TopicsController -> ", function() {
+
+            it('loads data',
+                inject(function ($controller, $http, dataservice) {
+
+                    var theScope = {};
+
+                    var ctrl = $controller('topicsController',
+                        {
+                            $scope: theScope,
+                            dataservice: dataservice,
+                            $http: $http
+                        });
+
+                    expect(theScope.isBusy).toBe(true);
+
+
+                    $httpBackend.flush();
+
+                    expect(ctrl).not.toBeNull();
+                    expect(theScope.data).toBeDefined();
+                    expect(theScope.data.topics.length).toBe(1);
+                    expect(theScope.data.topics[0].body).toBe('Hi there');
+                    expect(theScope.data.topics[0].id).toBe(5);
+                    expect(theScope.data.topics[0].title).toBe('Hello');
+                    expect(theScope.isBusy).toBe(false);
+
+
+
+                }));
+        });
 
         describe("DataService -> ",
             function() {
