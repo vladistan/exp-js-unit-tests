@@ -102,10 +102,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Content Include="ClientTests\homeIndexTest.js" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
     <Compile Include="Fakes\FakeMessageBoardRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\TopicsController.cs" />
+    <Content Include="Content\jasmine\jasmine.css" />
+    <Content Include="Content\jasmine\jasmine_favicon.png" />
+    <Content Include="Scripts\jasmine\boot.js" />
+    <Content Include="Scripts\jasmine\console.js" />
+    <Content Include="Scripts\jasmine\jasmine-html.js" />
+    <Content Include="Scripts\jasmine\jasmine.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MessageBoard\MessageBoard.csproj">
@@ -116,6 +123,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClientTests\app.tests.js" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

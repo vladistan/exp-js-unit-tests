@@ -115,7 +115,7 @@ namespace MessageBoard.Test.Controllers
 
             Assert.IsNotNull(rvTopic);
             Assert.IsTrue(rvTopic.Id > 4);
-            Assert.AreEqual(rvTopic.Title, "Hello There");
+            Assert.AreEqual(rvTopic.Title, "Hello there");
 
         }
 
