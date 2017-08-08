@@ -1,10 +1,10 @@
 ﻿/// <reference path="../scripts/jasmine/jasmine.js"/>
-/// <reference path="../../messageboard/scripts/angular.min.js" />
-/// <reference path="../../messageboard/scripts/angular-mocks.js" />
-/// <reference path="../../messageboard/scripts/angular-route.js" />
-/// <reference path="../../messageboard/js/homeindex.js" />
+/// <reference path="../../mboard.frontend/scripts/angular.min.js" />
+/// <reference path="../../mboard.frontend/scripts/angular-mocks.js" />
+/// <reference path="../../mboard.frontend/scripts/angular-route.js" />
+/// <reference path="../../mboard.frontend/js/homeindex.js" />
 
-/// <reference path="../../messageboard/js/hojjmeindex.js" />
+/// <reference path="../../mboard.frontend/js/hojjmeindex.js" />
 
 
 describe("Home Index Tests -> ",
