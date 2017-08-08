@@ -1,0 +1,23 @@
+﻿<h3>New Message</h3>
+<form name="newTopicForm" ng-submit="save()" novalidate>
+    <fieldset>
+        <div>
+            <label for="title">Title:</label>
+            <input name="title" type="text" ng-model="newTopic.title" ng-minlength="5" required=""/>
+            <span class="error" ng-show="newTopicForm.title.$error.required">*</span>
+            <span class="error" ng-show="newTopicForm.title.$error.minlength">[Minimum 5 chars]</span>
+        </div>
+        <div>
+            <label for="body">Body:</label>
+            <input name="body" type="text" rows="5" cols="50" ng-model="newTopic.body" ng-minlength="15" required=""/>
+            <span class="error" ng-show="newTopicForm.body.$error.required">*</span>
+            <span class="error" ng-show="newTopicForm.body.$error.minlength">[Minimum 15 chars]</span>
+        </div>
+        <div class="row">
+            <input value="Save" class="btn col-md-4" ng-disabled="newTopicForm.$invalid" type="Submit"/>
+            <a href="#!/" class="btn col-md-4">Cancel</a>
+        </div>
+
+
+    </fieldset>
+</form>

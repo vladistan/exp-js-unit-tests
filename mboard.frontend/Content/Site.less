@@ -1,0 +1,39 @@
+﻿@maincolor: #888;
+@baseMessageColor: #aaa;
+
+
+
+.foo {
+    width: 100px;
+    color: @maincolor;
+}
+
+.bar {
+    color: @maincolor;
+}
+
+.message {
+    border: 1px solid @baseMessageColor;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    background:  lighten(@baseMessageColor, 30%);
+
+    .title {
+        font-weight: bold;
+        font-size: 20px;
+        text-shadow: 2px 2px 4px @baseMessageColor;
+    }
+
+    .reply {
+        border-top: 1px solid @baseMessageColor;
+        margin-top: 8px;
+        margin-left: 20px;
+
+        .created {
+            margin-left: 12px;
+            font-size: 8px;
+            text-shadow: 2px 2px 4px @baseMessageColor;
+        }
+    }
+}
