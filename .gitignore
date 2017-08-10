@@ -202,3 +202,13 @@ MessageBoard/Content/Site.min.css
 MessageBoard/Content/Site.css
 MessageBoard/Scripts/
 mboard.frontend/Scripts/
+mboard.frontend.test/Content/jasmine/jasmine.css
+mboard.frontend.test/Content/jasmine/jasmine_favicon.png
+mboard.frontend/Content/bootstrap-theme.css
+mboard.frontend/Content/bootstrap-theme.css.map
+mboard.frontend/Content/bootstrap-theme.min.css
+mboard.frontend/Content/bootstrap-theme.min.css.map
+mboard.frontend/Content/bootstrap.css
+mboard.frontend/Content/bootstrap.css.map
+mboard.frontend/Content/bootstrap.min.css
+mboard.frontend/Content/bootstrap.min.css.map

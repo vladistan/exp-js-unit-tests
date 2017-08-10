@@ -4,8 +4,6 @@
 /// <reference path="../../mboard.frontend/scripts/angular-route.js" />
 /// <reference path="../../mboard.frontend/js/homeindex.js" />
 
-/// <reference path="../../mboard.frontend/js/hojjmeindex.js" />
-
 
 describe("Home Index Tests -> ",
     function () {
